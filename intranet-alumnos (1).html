@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Intranet Alumnos - UNI</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+        }
+        .container {
+            display: flex;
+            height: 100vh;
+        }
+        .sidebar {
+            width: 250px;
+            background-color: #2c3e50;
+            color: white;
+            display: flex;
+            flex-direction: column;
+        }
+        .sidebar-header {
+            padding: 15px;
+            background-color: #233240;
+            font-weight: bold;
+            display: flex;
+            align-items: center;
+        }
+        .sidebar-header img {
+            height: 40px;
+            margin-right: 10px;
+        }
+        .sidebar-menu {
+            list-style-type: none;
+            flex-grow: 1;
+        }
+        .sidebar-menu li {
+            padding: 10px 15px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+        }
+        .sidebar-menu li img {
+            height: 24px;
+            margin-right: 10px;
+        }
+        .sidebar-menu li:hover {
+            background-color: #34495e;
+        }
+        .main-content {
+            flex-grow: 1;
+            padding: 20px;
+            background-color: #ecf0f1;
+            display: flex;
+            flex-direction: column;
+        }
+        .content-header {
+            display: flex;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+        .content-header img {
+            height: 30px;
+            margin-right: 10px;
+        }
+        .section-container {
+            background: white;
+            border-radius: 5px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+            padding: 20px;
+        }
+        .form-group {
+            margin-bottom: 15px;
+        }
+        .form-group label {
+            display: block;
+            margin-bottom: 5px;
+        }
+        .form-group input {
+            width: 100%;
+            padding: 8px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+        }
+        .btn {
+            background-color: #3498db;
+            color: white;
+            border: none;
+            padding: 10px 15px;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+        .btn:hover {
+            background-color: #2980b9;
+        }
+        .nav-path {
+            background-color: #f1f2f6;
+            padding: 10px;
+            margin-bottom: 20px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="sidebar">
+            <div class="sidebar-header">
+                <img src="/api/placeholder/50/50" alt="UNI Logo">
+                INTRANET ALUMNOS
+            </div>
+            <ul class="sidebar-menu">
+                <li onclick="showSection('inicio')">
+                    <img src="/api/placeholder/24/24" alt="Inicio">
+                    Inicio
+                </li>
+                <li onclick="showSection('ficha-usuario')">
+                    <img src="/api/placeholder/24/24" alt="Ficha Usuario">
+                    Ficha de Usuario
+                </li>
+                <li>
+                    <img src="/api/placeholder/24/24" alt="Información Académica">
+                    Información Académica
+                </li>
+                <li>
+                    <img src="/api/placeholder/24/24" alt="Mis Trámites">
+                    Mis Tramites
+                </li>
+                <li>
+                    <img src="/api/placeholder/24/24" alt="Trámites y Pagos">
+                    Tramites y Pagos
+                </li>
+                <li>
+                    <img src="/api/placeholder/24/24" alt="Cerrar Sesión">
+                    Cerrar Sesión
+                </li>
+            </ul>
+        </div>
+        <div class="main-content" id="main-content">
+            <div class="nav-path">
+                Alumno / Ficha de Usuario
+            </div>
+            <div id="ficha-usuario-section" style="display: none;">
+                <div class="content-header">
+                    <img src="/api/placeholder/30/30" alt="Ficha Usuario">
+                    <h2>Ficha de Usuario</h2>
+                </div>
+                <div class="section-container">
+                    <div class="form-group">
+                        <label>Datos Personales</label>
+                        <input type="text" placeholder="Nombre Completo">
+                    </div>
+                    <div class="form-group">
+                        <label>Cambio de Clave</label>
+                        <button class="btn" onclick="showSection('cambio-clave')">Cambiar Contraseña</button>
+                    </div>
+                </div>
+            </div>
+            <div id="cambio-clave-section" style="display: none;">
+                <div class="content-header">
+                    <img src="/api/placeholder/30/30" alt="Cambio Clave">
+                    <h2>Cambio de Clave</h2>
+                </div>
+                <div class="section-container">
+                    <div class="form-group">
+                        <label>Clave Actual</label>
+                        <input type="password" placeholder="Ingrese clave actual">
+                    </div>
+                    <div class="form-group">
+                        <label>Nueva Clave</label>
+                        <input type="password" placeholder="Ingrese nueva clave">
+                    </div>
+                    <div class="form-group">
+                        <label>Confirma Clave</label>
+                        <input type="password" placeholder="Confirme nueva clave">
+                    </div>
+                    <button class="btn">Cambiar Clave</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        function showSection(section) {
+            // Hide all sections
+            document.getElementById('ficha-usuario-section').style.display = 'none';
+            document.getElementById('cambio-clave-section').style.display = 'none';
+
+            // Show selected section
+            if (section === 'ficha-usuario') {
+                document.getElementById('ficha-usuario-section').style.display = 'block';
+            } else if (section === 'cambio-clave') {
+                document.getElementById('cambio-clave-section').style.display = 'block';
+            }
+        }
+    </script>
+</body>
+</html>
